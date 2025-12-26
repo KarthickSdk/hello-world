@@ -1,0 +1,19 @@
+- name: Deploy Tomcat App
+  hosts: ec2
+  become: true
+
+  tasks:
+    - name: Login to Docker Hub
+      docker_login:
+        username: karthicksdk45
+        password: Karthick@8660
+
+    - name: Pull application image
+      docker_container:
+        name: tomcat
+        image: karthicksdk45/tomcat:v1
+        state: started
+        restart_policy: always
+        ports:
+          - "8080:8080"
+
